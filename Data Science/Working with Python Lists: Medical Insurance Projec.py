@@ -117,3 +117,4 @@ Select the medical records starting at index 3 and ending at index 7 and save it
 medical_records.sort()
 middle_five_records = medical_records[3:8]
 print(middle_five_records)
+

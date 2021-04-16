@@ -56,6 +56,23 @@ damages = ['Damages not recorded', '100M', 'Damages not recorded', '40M', '27.9M
 deaths = [90, 4000, 16, 3103, 179, 184, 408, 682, 5, 1023, 43, 319, 688, 259, 37, 11, 2068, 269, 318, 107, 65, 19325,
           51, 124, 17, 1836, 125, 87, 45, 133, 603, 138, 3057, 74]
 
+mortality_scale = []
+for death in deaths:
+    if deaths == 0:
+        mortality_scale.append(0)
+    elif death <= 100:
+        mortality_scale.append(1)
+    elif death <= 500:
+        mortality_scale.append(2)
+    elif death <= 1000:
+        mortality_scale.append(3)
+    elif death <= 10000:
+        mortality_scale.append(4)
+    else:
+        mortality_scale.append(5)
+
+# print(mortality_scale)
+
 
 # write your update damages function here:
 
@@ -106,7 +123,8 @@ def dict_year():
 
 year_categorized = dict_year()
 
-print(year_categorized[2005])
+# print(year_categorized[2005])
+
 
 # write your count affected areas function here:
 def future_hurricanes():
@@ -132,13 +150,33 @@ def most_hurricanes():
             list_of_max.append(key)
     return list_of_max
 
-print(most_hurricanes())
+
+# print(most_hurricanes())
 
 # write your greatest number of deaths function here:
+def step_07():
+    max_deaths = 0
+    for area in names:
+        if dict_hurricane[area]['Deaths'] > max_deaths:
+            max_deaths = dict_hurricane[area]['Deaths']
+            name_of_hurricane = dict_hurricane[area]['Name']
+    return max_deaths, name_of_hurricane
 
+
+# print(step_07())
 
 # write your catgeorize by mortality function here:
+mortality_dict = {}
+for ms, name in zip(mortality_scale, names):
+    if ms in mortality_dict.keys():
+        mortality_dict[ms].append(name)
+    else:
+        mortality_dict[ms] = [name]
 
+kommas = list(mortality_dict.keys()).sort
+print(kommas)
+for i in mortality_dict.keys():
+    print(i, mortality_dict[i])
 
 # write your greatest damage function here:
 

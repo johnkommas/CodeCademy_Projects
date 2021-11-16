@@ -32,32 +32,35 @@ to assign different answers for each randomly generated value.
 First, write an if statement where if the random_number is equal to 1,
 answer is assigned to the phrase “Yes - definitely.”
 """
-# init libraries
-# 4.
 import random
 
-# WELCOME SCREEN
-print("ΚΑΛΩΣ ΗΡΘΕΣ ΣΤΟ Magic 8 Ball")
-# 1.
-name = input("ΤΟ ΟΝΟΜΑ ΣΟΥ: ")
 
-# 2.
-question = input("ΤΟ ΕΡΩΤΗΜΑ ΣΟΥ: ")
+def run():
+    print("ΚΑΛΩΣ ΗΡΘΕΣ ΣΤΟ Magic 8 Ball")
+    print('\rΤΟ ΟΝΟΜΑ ΣΟΥ: ', end='', flush=True)
+    name = input('')
+    print('\rΤΟ ΕΡΩΤΗΜΑ ΣΟΥ: ', end='', flush=True)
+    question = input("")
+    answer = {1: 'Ναι σίγουρα.',
+              2: 'Είναι αναμφισβήτητα έτσι.',
+              3: 'Χωρίς αμφιβολία.',
+              4: 'Απάντηση θολή, δοκίμασε ξανά.',
+              5: 'Ρωτήστε ξανά αργότερα.',
+              6: 'Καλύτερα να μη σου πω τώρα.',
+              7: 'Οι πηγές μου λένε όχι.',
+              8: 'ΧΜΜ...',
+              9: 'Πολύ αμφίβολο.'
+              }
+    if len(question) > 0:
+        print(f"{name} ΡΩΤΗΣΕ: {question}" if len(name) > 0 else f'ΑΝΩΝΥΜΟ ΕΡΩΤΗΜΑ: {question}')
+        print(f'ΑΠΑΝΤΗΣΗ: {answer.get(random.randint(1, len(answer)), "ΣΦΑΛΜΑ")}')
+    else:
+        return run()
 
-# 3.
-answer = {1: 'Ναι σίγουρα.',
-          2: 'Είναι αναμφισβήτητα έτσι.',
-          3: 'Χωρίς αμφιβολία.',
-          4: 'Απάντηση θολή, δοκίμασε ξανά.',
-          5: 'Ρωτήστε ξανά αργότερα.',
-          6: 'Καλύτερα να μη σου πω τώρα.',
-          7: 'Οι πηγές μου λένε όχι.',
-          8: 'ΧΜΜ...',
-          9: 'Πολύ αμφίβολο.'
-          }
 
-# 5.
-random_number = random.randint(1, 9)
-print(f"{name} ΡΩΤΗΣΕ: {question}")
-print(f'Η ΜΑΓΙΚΗ ΜΠΑΛΑ ΑΠΑΝΤΑ: {answer.get(random_number, "ERROR")}')
+while True:
+    run()
+    if input("") == '1':
+        break
+
 

@@ -33,34 +33,26 @@ First, write an if statement where if the random_number is equal to 1,
 answer is assigned to the phrase “Yes - definitely.”
 """
 import random
+from answers import answer
 
 
-def run():
-    print("ΚΑΛΩΣ ΗΡΘΕΣ ΣΤΟ Magic 8 Ball")
-    print('\rΤΟ ΟΝΟΜΑ ΣΟΥ: ', end='', flush=True)
-    name = input('')
-    print('\rΤΟ ΕΡΩΤΗΜΑ ΣΟΥ: ', end='', flush=True)
-    question = input("")
-    answer = {1: 'Ναι σίγουρα.',
-              2: 'Είναι αναμφισβήτητα έτσι.',
-              3: 'Χωρίς αμφιβολία.',
-              4: 'Απάντηση θολή, δοκίμασε ξανά.',
-              5: 'Ρωτήστε ξανά αργότερα.',
-              6: 'Καλύτερα να μη σου πω τώρα.',
-              7: 'Οι πηγές μου λένε όχι.',
-              8: 'ΧΜΜ...',
-              9: 'Πολύ αμφίβολο.'
-              }
+def run(__name):
+    question = input("ΤΟ ΕΡΩΤΗΜΑ ΣΟΥ: ")
     if len(question) > 0:
-        print(f"{name} ΡΩΤΗΣΕ: {question}" if len(name) > 0 else f'ΑΝΩΝΥΜΟ ΕΡΩΤΗΜΑ: {question}')
+        print(f"{__name} ΡΩΤΗΣΕ: {question}" if len(__name) > 0 else f'ΑΝΩΝΥΜΟ ΕΡΩΤΗΜΑ: {question}')
         print(f'ΑΠΑΝΤΗΣΗ: {answer.get(random.randint(1, len(answer)), "ΣΦΑΛΜΑ")}')
     else:
-        return run()
+        return run(__name)
+    return __name
 
 
+name = ''
 while True:
-    run()
-    if input("") == '1':
+    try:
+        if len(name) == 0:
+            name = input('ΤΟ ΟΝΟΜΑ ΣΟΥ: ')
+        name = run(name)
+    except KeyboardInterrupt:
+        print("\nGood By!!")
         break
-
 
